@@ -10,10 +10,10 @@ import androidx.compose.ui.text.input.KeyboardType
 @Composable
 fun TextField(
     value: String,
-    onValueChange: (text:String) -> Unit,
+    onValueChange: (text: String) -> Unit,
     holder: String,
     label: String,
-    vm:ViewUser,
+    vm: ViewUser,
     modifier: Modifier = Modifier,
 ) {
     OutlinedTextField(
@@ -21,15 +21,17 @@ fun TextField(
             "fullname" -> {
                 vm.dateUser.fullName
             }
+
             "gender" -> {
                 vm.dateUser.gender
             }
+
             "phone" -> {
                 vm.dateUser.phone
             }
+
             else -> vm.dateUser.address
-        }
-            ,
+        },
         onValueChange = {
             onValueChange(it)
         },
@@ -37,7 +39,7 @@ fun TextField(
         label = { Text(text = label) },
         modifier = modifier,
         keyboardOptions = KeyboardOptions(
-            keyboardType =  if (value == "phone") KeyboardType.Phone else KeyboardType.Text
+            keyboardType = if (value == "phone") KeyboardType.Phone else KeyboardType.Text
         ),
     )
 }

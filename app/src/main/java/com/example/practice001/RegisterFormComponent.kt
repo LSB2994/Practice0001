@@ -3,11 +3,9 @@ package com.example.practice001
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.AccountCircle
 import androidx.compose.material3.Button
@@ -55,7 +53,7 @@ fun RegisterForm() {
 
         TextField(
             "fullname",
-            { view.UpdateFullName(it) },
+            { view.updateFullName(it) },
             "Leng Sambath",
             "Full name",
             view,
@@ -66,14 +64,13 @@ fun RegisterForm() {
             Modifier.fillMaxWidth()
         ) {
             TextField(
-                "gender", { view.UpdateGender(it) }, "Male", "Gender", view, Modifier.width(120.dp)
-
+                "gender", { view.updateGender(it) }, "Male", "Gender", view, Modifier.width(120.dp)
             )
             TextField(
                 "phone",
                 {
                     if (it.isEmpty() || it.matches(pattern)) {
-                        view.UpdatePhone(it)
+                        view.updatePhone(it)
                     }
                 },
                 "095****60",
@@ -86,7 +83,7 @@ fun RegisterForm() {
         }
         TextField(
             "address",
-            { view.UpdateAddress(it) },
+            { view.updateAddress(it) },
             "Phom Penh",
             "Address",
             view,
@@ -95,7 +92,7 @@ fun RegisterForm() {
         if (view.dateUser.fullName.isNotEmpty() && view.dateUser.gender.isNotEmpty() && view.dateUser.phone.isNotEmpty() && view.dateUser.address.isNotEmpty()) {
             Button(
                 onClick = {
-                    view.RegisterUser()
+                    view.registerUser()
                 },
                 Modifier
                     .fillMaxWidth()
@@ -105,7 +102,7 @@ fun RegisterForm() {
             }
         } else Button(
             onClick = {
-                view.RegisterUser()
+                view.registerUser()
             },
             Modifier
                 .fillMaxWidth()

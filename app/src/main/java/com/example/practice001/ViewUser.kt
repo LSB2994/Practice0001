@@ -8,31 +8,31 @@ import androidx.lifecycle.ViewModel
 class ViewUser : ViewModel() {
     var dateUser by mutableStateOf(User())
 
-    fun UpdateFullName(input:String){
+    fun updateFullName(input: String) {
         dateUser = dateUser.copy(
             fullName = input
         )
     }
 
-    fun UpdateGender(input: String){
+    fun updateGender(input: String) {
         dateUser = dateUser.copy(
             gender = input
         )
     }
 
-    fun UpdatePhone(input: String){
+    fun updatePhone(input: String) {
         dateUser = dateUser.copy(
             phone = input
         )
     }
 
-    fun UpdateAddress(input: String){
+    fun updateAddress(input: String) {
         dateUser = dateUser.copy(
             address = input
         )
     }
 
-    fun RegisterUser():User{
-        return User(dateUser.fullName,dateUser.gender,dateUser.phone,dateUser.address)
+    fun registerUser(): User {
+        return User(dateUser.fullName, dateUser.gender, dateUser.phone, dateUser.address)
     }
 }
