@@ -7,12 +7,14 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.AccountCircle
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -23,11 +25,12 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
-fun RegisterForm(){
-    val view : ViewUser = viewModel()
+fun RegisterForm() {
+    val pattern = remember { Regex("\\d+") }
+    val view: ViewUser = viewModel()
     Column(
         Modifier
-            .fillMaxSize()
+            .fillMaxWidth()
             .padding(10.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
 //        verticalArrangement = Arrangement.Center
@@ -38,71 +41,75 @@ fun RegisterForm(){
                 .padding(10.dp, 0.dp, 10.dp, 0.dp),
             horizontalArrangement = Arrangement.Absolute.SpaceBetween
         ) {
-            Text(text = "Information",
+            Text(
+                text = "Information",
                 color = Color.Black,
                 fontWeight = FontWeight.Bold,
                 fontSize = 20.sp
             )
-            Icon(Icons.Rounded.AccountCircle, contentDescription  = stringResource(id = R.string.app_name))
+            Icon(
+                Icons.Rounded.AccountCircle,
+                contentDescription = stringResource(id = R.string.app_name)
+            )
         }
 
         TextField(
-            value = view.fullName,
-            onValueChange = {view.fullName = it},
-            holder = "Leng Sambath",
-            label = "Full name",
+            "fullname",
+            { view.UpdateFullName(it) },
+            "Leng Sambath",
+            "Full name",
+            view,
             Modifier
                 .fillMaxWidth()
-                .padding(10.dp)
         )
         Row(
-            Modifier.padding(10.dp)
+            Modifier.fillMaxWidth()
         ) {
             TextField(
-                value = view.gender,
-                onValueChange = {view.gender = it},
-                holder = "Male",
-                label = "Gender",
-                Modifier.width(120.dp)
+                "gender", { view.UpdateGender(it) }, "Male", "Gender", view, Modifier.width(120.dp)
 
             )
             TextField(
-                value = view.phone,
-                onValueChange = {view.phone = it},
-                holder = "095****60",
-                label = "Phone",
+                "phone",
+                {
+                    if (it.isEmpty() || it.matches(pattern)) {
+                        view.UpdatePhone(it)
+                    }
+                },
+                "095****60",
+                "Phone",
+                view,
                 Modifier
                     .fillMaxWidth()
                     .padding(start = 10.dp)
             )
         }
         TextField(
-            value = view.address,
-            onValueChange = {view.address = it},
-            holder = "Phom Penh",
-            label = "Address",
-            Modifier
-                .fillMaxWidth()
-                .padding(10.dp)
+            "address",
+            { view.UpdateAddress(it) },
+            "Phom Penh",
+            "Address",
+            view,
+            Modifier.fillMaxWidth()
         )
-        if (view.fullName.isNotEmpty() &&
-            view.gender.isNotEmpty() &&
-            view.phone.isNotEmpty() &&
-            view.address.isNotEmpty()){
-            Button(onClick = { view.RegisterUser()
-            },
+        if (view.dateUser.fullName.isNotEmpty() && view.dateUser.gender.isNotEmpty() && view.dateUser.phone.isNotEmpty() && view.dateUser.address.isNotEmpty()) {
+            Button(
+                onClick = {
+                    view.RegisterUser()
+                },
                 Modifier
-                    .fillMaxWidth(),
-                enabled = true
-                ) {
+                    .fillMaxWidth()
+                    .padding(top = 10.dp), enabled = true
+            ) {
                 Text(text = "Submit")
             }
-        }else
-            Button(onClick = { view.RegisterUser()
-        },
+        } else Button(
+            onClick = {
+                view.RegisterUser()
+            },
             Modifier
-                .fillMaxWidth(),
-            enabled = false
+                .fillMaxWidth()
+                .padding(top = 10.dp), enabled = false
         ) {
             Text(text = "Submit")
         }
