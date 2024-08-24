@@ -34,10 +34,7 @@ fun RegisterForm() {
 //        verticalArrangement = Arrangement.Center
     ) {
         Row(
-            Modifier
-                .fillMaxWidth()
-                .padding(10.dp, 0.dp, 10.dp, 0.dp),
-            horizontalArrangement = Arrangement.Absolute.SpaceBetween
+            Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Absolute.SpaceBetween
         ) {
             Text(
                 text = "Information",
@@ -57,8 +54,7 @@ fun RegisterForm() {
             "Leng Sambath",
             "Full name",
             view,
-            Modifier
-                .fillMaxWidth()
+            Modifier.fillMaxWidth()
         )
         Row(
             Modifier.fillMaxWidth()
@@ -67,15 +63,11 @@ fun RegisterForm() {
                 "gender", { view.updateGender(it) }, "Male", "Gender", view, Modifier.width(120.dp)
             )
             TextField(
-                "phone",
-                {
+                "phone", {
                     if (it.isEmpty() || it.matches(pattern)) {
                         view.updatePhone(it)
                     }
-                },
-                "095****60",
-                "Phone",
-                view,
+                }, "095****60", "Phone", view,
                 Modifier
                     .fillMaxWidth()
                     .padding(start = 10.dp)

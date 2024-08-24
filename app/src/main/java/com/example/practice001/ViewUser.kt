@@ -23,7 +23,7 @@ class ViewUser : ViewModel() {
     fun updatePhone(input: String) {
         dateUser = dateUser.copy(
             phone = input
-        )
+        ) 
     }
 
     fun updateAddress(input: String) {

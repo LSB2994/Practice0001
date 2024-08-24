@@ -6,3 +6,7 @@ data class User(
     var phone: String = "",
     var address: String = "",
 )
+//enum class Gender{
+//     MALE,
+//    FEMALE
+//}
